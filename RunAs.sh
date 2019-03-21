@@ -14,7 +14,7 @@ if [[ "$userlist" == "root" ]]; then
 	echo ""
 	# If the munki folder is there, we can fix it.  If it's missing, either this is somthing that the user has done or it's something we've done and the user has tried to do away with munki before the changes have taken hold. 
 	if [ -d /usr/local/munki ]; then
-		echo "You need to contact Operational Support with the computer name \"$cn\" to have this rectified."
+		echo "You need to contact IT Support with the computer name \"$cn\" to have this fixed."
 	else
 		echo "This Mac doesn't seem to have our management software on it....."
 		echo ""
@@ -25,9 +25,13 @@ if [[ "$userlist" == "root" ]]; then
 fi
 
 # What command do the want to run?
-echo "What command do you want to run? (assuming sudo):"
-read mycmd
-echo ""
+if [ -z "$1" ]; then
+	echo "What command do you want to run? (assuming sudo):"
+	read mycmd
+	echo ""
+else
+	mycmd="$1"
+fi
 
 # what user do the want to run this as? 
 echo "Who do you want to run this command as?:"
